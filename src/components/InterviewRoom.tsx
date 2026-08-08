@@ -5,6 +5,8 @@ import { Candidate, InterviewSession, Message, ProctorStatus, InterviewResponse 
 import { CameraProctor } from './CameraProctor';
 import { VoiceAssistantController } from './VoiceAssistantController';
 
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
+
 interface InterviewRoomProps {
   candidate: Candidate;
   sessionId: string;
@@ -65,7 +67,7 @@ export const InterviewRoom: React.FC<InterviewRoomProps> = ({
     setLoading(true);
     setErrorMsg(null);
     try {
-      const res = await fetch('/api/interview', {
+      const res = await fetch(`${API_BASE_URL}/api/interview`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -137,7 +139,7 @@ export const InterviewRoom: React.FC<InterviewRoomProps> = ({
     }));
 
     try {
-      const res = await fetch('/api/interview', {
+      const res = await fetch(`${API_BASE_URL}/api/interview`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -218,7 +220,7 @@ export const InterviewRoom: React.FC<InterviewRoomProps> = ({
       window.speechSynthesis.cancel();
     }
     try {
-      const res = await fetch('/api/interview', {
+      const res = await fetch(`${API_BASE_URL}/api/interview`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

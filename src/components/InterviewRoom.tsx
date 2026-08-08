@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Send, Bot, User, Award, RefreshCw, AlertCircle, ArrowRight, CheckCircle2, Sparkles, StopCircle, Play, Mic, Volume2, HelpCircle } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
+import { buildApiUrl } from '../api/config';
 import { Candidate, InterviewSession, Message, ProctorStatus, InterviewResponse } from '../types';
 import { CameraProctor } from './CameraProctor';
 import { VoiceAssistantController } from './VoiceAssistantController';
-
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:3001';
 
 interface InterviewRoomProps {
   candidate: Candidate;
@@ -67,7 +66,7 @@ export const InterviewRoom: React.FC<InterviewRoomProps> = ({
     setLoading(true);
     setErrorMsg(null);
     try {
-      const res = await fetch(`${API_BASE_URL}/api/interview`, {
+      const res = await fetch(buildApiUrl('/api/interview'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -139,7 +138,7 @@ export const InterviewRoom: React.FC<InterviewRoomProps> = ({
     }));
 
     try {
-      const res = await fetch(`${API_BASE_URL}/api/interview`, {
+      const res = await fetch(buildApiUrl('/api/interview'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -220,7 +219,7 @@ export const InterviewRoom: React.FC<InterviewRoomProps> = ({
       window.speechSynthesis.cancel();
     }
     try {
-      const res = await fetch(`${API_BASE_URL}/api/interview`, {
+      const res = await fetch(buildApiUrl('/api/interview'), {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
